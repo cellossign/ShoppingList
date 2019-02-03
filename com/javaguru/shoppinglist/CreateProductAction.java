@@ -10,6 +10,7 @@ public class CreateProductAction implements Action {
     private final ProductService productService;
 
     public CreateProductAction(ProductService productService) {
+
         this.productService = productService;
     }
 
@@ -35,6 +36,7 @@ public class CreateProductAction implements Action {
 
     @Override
     public String toString() {
+
         return ACTION_NAME;
     }
 }
