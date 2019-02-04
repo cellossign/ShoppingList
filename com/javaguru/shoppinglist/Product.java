@@ -86,7 +86,7 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", category= " + category + ", bargin= " + bargin + "descpription: " + description +
+                ", category= " + category + ", bargin= " + bargin + ", descpription: " + description +
                 '}';
     }
 }
