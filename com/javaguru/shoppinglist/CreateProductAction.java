@@ -22,11 +22,11 @@ public class CreateProductAction implements Action {
         System.out.println("Enter product price: ");
         String price = scanner.nextLine();
         System.out.println("Enter product category");
-        String category =scanner.nextLine();
+        String category = scanner.nextLine();
         System.out.println("Enter product description");
-        String description=scanner.nextLine();
+        String description = scanner.nextLine();
         System.out.println("Enter product bargin");
-        int bargin =scanner.nextInt();
+        int bargin = scanner.nextInt();
 
         Product product = new Product();
         product.setName(name);
@@ -35,11 +35,22 @@ public class CreateProductAction implements Action {
         product.setCategory(category);
         product.setDescription(description);
 
-        try {
-            Long response = productService.create(product);
-            System.out.println("Response: " + response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+
+        if (
+                (product.getPrice().equals(new BigDecimal(0.0)))
+                        || (product.getBargin() == 100) ||
+                        (product.getName().length() < 3) || (product.getName().length() > 32))
+        {
+            System.out.println("Can't create that kind of product!");
+        }
+        else
+                            {
+            try {
+                Long response = productService.create(product);
+                System.out.println("Response: " + response);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 

@@ -65,9 +65,6 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (o == null || getPrice().equals(new BigDecimal(0.0))) return false;
-        if (o == null || getBargin() == 100) return false;
-        if (o == null || getName().length() < 3 || getName().length() > 32) return false;
         Product product = (Product) o;
         return Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name) &&
