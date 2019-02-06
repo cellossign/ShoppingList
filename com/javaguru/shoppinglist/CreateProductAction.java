@@ -35,16 +35,14 @@ public class CreateProductAction implements Action {
         product.setCategory(category);
         product.setDescription(description);
 
+        if ((product.getPrice().equals(new BigDecimal(0.0))) ||
+                (product.getPrice().compareTo(new BigDecimal(0.0)) < 0) || //cena menjshe nulja
+                (product.getBargin() >= 100) ||
+                (product.getBargin() <0) ||
+                (product.getName().length() < 3) || (product.getName().length() > 32)) {
 
-        if (
-                (product.getPrice().equals(new BigDecimal(0.0)))
-                        || (product.getBargin() == 100) ||
-                        (product.getName().length() < 3) || (product.getName().length() > 32))
-        {
             System.out.println("Can't create that kind of product!");
-        }
-        else
-                            {
+        } else {
             try {
                 Long response = productService.create(product);
                 System.out.println("Response: " + response);
