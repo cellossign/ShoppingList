@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private BigDecimal price;
     private String category;
-    private int bargin;
+    private int discount;
     private String description;
 
     public String getCategory() {
@@ -20,12 +20,12 @@ public class Product {
         this.category = category;
     }
 
-    public int getBargin() {
-        return bargin;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setBargin(int bargin) {
-        this.bargin = bargin;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
     public String getDescription() {
@@ -73,7 +73,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, category, bargin, description);
+        return Objects.hash(id, name, price, category, discount, description);
 
     }
 
@@ -83,7 +83,7 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", category= " + category + ", bargin= " + bargin + ", descpription: " + description +
+                ", category= " + category + ", discount= " + discount + ", descpription: " + description +
                 '}';
     }
 }

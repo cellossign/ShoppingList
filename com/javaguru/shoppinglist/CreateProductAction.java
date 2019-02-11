@@ -25,20 +25,20 @@ public class CreateProductAction implements Action {
         String category = scanner.nextLine();
         System.out.println("Enter product description");
         String description = scanner.nextLine();
-        System.out.println("Enter product bargin");
-        int bargin = scanner.nextInt();
+        System.out.println("Enter product discount");
+        int discount = scanner.nextInt();
 
         Product product = new Product();
         product.setName(name);
         product.setPrice(new BigDecimal(price));
-        product.setBargin(bargin);
+        product.setDiscount(discount);
         product.setCategory(category);
         product.setDescription(description);
 
         if ((product.getPrice().equals(new BigDecimal(0.0))) ||
                 (product.getPrice().compareTo(new BigDecimal(0.0)) < 0) || //cena menjshe nulja
-                (product.getBargin() >= 100) ||
-                (product.getBargin() <0) ||
+                (product.getDiscount() >= 100) ||
+                (product.getDiscount() <0) ||
                 (product.getName().length() < 3) || (product.getName().length() > 32)) {
 
             System.out.println("Can't create that kind of product!");
