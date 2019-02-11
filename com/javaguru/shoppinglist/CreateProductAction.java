@@ -26,7 +26,11 @@ public class CreateProductAction implements Action {
         System.out.println("Enter product description");
         String description = scanner.nextLine();
         System.out.println("Enter product discount");
-        int discount = scanner.nextInt();
+        float dis = scanner.nextFloat();
+        int discount=0;
+        if (dis%1==0) {
+            discount=(int)dis;
+        } else {throw new ArithmeticException("Discount must be integer");}
 
         Product product = new Product();
         product.setName(name);
@@ -35,13 +39,17 @@ public class CreateProductAction implements Action {
         product.setCategory(category);
         product.setDescription(description);
 
-        if ((product.getPrice().equals(new BigDecimal(0.0))) ||
-                (product.getPrice().compareTo(new BigDecimal(0.0)) < 0) || //cena menjshe nulja
-                (product.getDiscount() >= 100) ||
-                (product.getDiscount() <0) ||
-                (product.getName().length() < 3) || (product.getName().length() > 32)) {
-
-            System.out.println("Can't create that kind of product!");
+        if ((product.getPrice().compareTo(new BigDecimal(0.0)) < 0) ||
+                (product.getPrice().equals(new BigDecimal(0.0)))) {
+            throw new ArithmeticException("Please enter valid price");
+        }
+        if ((product.getDiscount() >= 100)
+                || (product.getDiscount() < 0)) {
+            throw new ArithmeticException("Please eneter valid discount");
+        }
+        if ((product.getName().length() < 3) ||
+                (product.getName().length() > 32)) {
+            throw new ArithmeticException("Please enter valid name");
         } else {
             try {
                 Long response = productService.create(product);
