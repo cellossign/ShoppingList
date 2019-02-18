@@ -9,6 +9,7 @@ public class ConsoleUI {
     private final List<Action> actions;
 
     public ConsoleUI(List<Action> actions) {
+
         this.actions = actions;
     }
 

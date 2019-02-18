@@ -14,6 +14,9 @@ public class CreateProductAction implements Action {
         this.productService = productService;
     }
 
+    private ProductInMemoryRepository repository = new ProductInMemoryRepository();
+    private ProductValidationService validationService = new ProductValidationService();
+
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
@@ -27,10 +30,12 @@ public class CreateProductAction implements Action {
         String description = scanner.nextLine();
         System.out.println("Enter product discount");
         float dis = scanner.nextFloat();
-        int discount=0;
-        if (dis%1==0) {
-            discount=(int)dis;
-        } else {throw new ArithmeticException("Discount must be integer");}
+        int discount = 0;
+        if (dis % 1 == 0) {
+            discount = (int) dis;
+        } else {
+            throw new ArithmeticException("Discount must be integer");
+        }
 
         Product product = new Product();
         product.setName(name);
@@ -39,18 +44,7 @@ public class CreateProductAction implements Action {
         product.setCategory(category);
         product.setDescription(description);
 
-        if ((product.getPrice().compareTo(new BigDecimal(0.0)) < 0) ||
-                (product.getPrice().equals(new BigDecimal(0.0)))) {
-            throw new ArithmeticException("Please enter valid price");
-        }
-        if ((product.getDiscount() >= 100)
-                || (product.getDiscount() < 0)) {
-            throw new ArithmeticException("Please eneter valid discount");
-        }
-        if ((product.getName().length() < 3) ||
-                (product.getName().length() > 32)) {
-            throw new ArithmeticException("Please enter valid name");
-        } else {
+        if (validationService.validate(product)==true) {
             try {
                 Long response = productService.create(product);
                 System.out.println("Response: " + response);
@@ -58,6 +52,9 @@ public class CreateProductAction implements Action {
                 System.out.println(e.getMessage());
             }
         }
+        Product createdProduct = repository.insert(product);
+        //return createdProduct.getId();
+
     }
 
     @Override
